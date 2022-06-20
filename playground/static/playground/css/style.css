@@ -1,0 +1,89 @@
+div.ext-box {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.in-box {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+body {
+    background-color: black;
+    display: flex;
+}
+
+.doodle {
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas {
+    margin-left: 20px;
+    background-color: lightskyblue;
+    border: 5px solid gray;
+}
+
+.result_img {
+    margin-left: 100px;
+}
+
+.controls {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls .controls_colors {
+    display:flex;
+    align-items: center;
+}
+
+.controls_colors .controls_color {
+    margin-left: 3px;
+    margin-right: 3px;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.068);
+    cursor: pointer;
+}
+
+.controls .controls_range {
+    margin-top: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+}
+
+.controls .controls_btns {
+    margin-top: 15px;
+}
+
+.controls_btns button {
+    all: unset;
+    cusor: pointer;
+    background-color: azure;
+    padding: 5px 0px;
+    width: 80px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.068);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.controls_btns button:active {
+    transform: scale(0.98)
+}

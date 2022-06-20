@@ -1,0 +1,31 @@
+{% extends 'wiki/base.html' %}
+{% block title %}
+    <title>ToonWiki</title>
+{% endblock %}
+{% block main_area %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn_info btn-sm float-right" href="create_post/"
+               role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
+        {% endif %}
+    {% endif %}
+    <h1>Wiki</h1>
+
+    {% for post in post_list %}
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title}}</h2>
+            {% if post.work.description %}
+                <p class="card-text">{{ post.work.title }}: {{ post.work.description | truncatewords:30 }}</p>
+            {% endif %}
+            <p class="card-text">{{ post.get_markdown_content | truncatewords_html:45 | safe}}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            Posted on {{ post.created_at}} by
+            <a href="#">{{ post.author }}</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

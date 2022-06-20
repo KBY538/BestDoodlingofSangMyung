@@ -1,0 +1,41 @@
+{% extends 'wiki/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <title>ToonWiki - {{ post.work.title }}</title>
+{% endblock %}
+{% block main_area %}
+    <!-- Title -->
+    <h1 class="mt-4">{{ post.title }}</h1>
+
+    <!-- Author -->
+    <p class="lead">
+      by
+      <a href="#">{{ post.author }}</a>
+    </p>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p>Posted on {{ post.created_at }}</p>
+    {% if user.is_authenticated and user == post.author %}
+        <a class="btn btn_info btn-sm float-right" href="/wiki/update_post/{{ post.pk }}"
+           role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;Edit Post</a>
+    {% endif %}
+
+    <hr>
+
+    <!-- Preview Image -->
+
+        {% if post.work.rep_thumbnail %}
+            <img class="img-fluid rounded" src="{{ post.work.rep_thumbnail.url }}" alt="">
+        {% endif %}
+
+    <hr>
+
+    <!-- Post Content -->
+    <p>{{ post.get_markdown_content | safe }}</p>
+
+<p><a href="{{ post.work.get_absolute_url }}"><strong>만화 보러 가기</strong></a></p>
+
+
+{% endblock %}

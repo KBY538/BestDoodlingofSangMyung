@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'playground/bootstrap/bootstrap.min.css' %}" media="screen">
+
+<div class="ext-box">
+{% include 'playground/navbar.html' %}
+  <div class="in-box">
+
+    <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+    {% load static %}
+      <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+        <Link rel="stylesheet" href="{% static 'playground/css/style.css' %}">
+        <title>Playground</title>
+      </head>
+      <body>
+        <div id="doodle" class="doodle">
+          <canvas id="canvas" class="canvas" width="450" height="450"></canvas>
+          <div class="controls">
+            <div class="controls_colors" id="jsColors">
+              <div class="controls_color jsColor" style="background-color: lightskyblue;">하늘</div>
+              <div class="controls_color jsColor" style="background-color: lightgreen;">앞산</div>
+              <div class="controls_color jsColor" style="background-color: lightseagreen;">뒷산</div>
+              <div class="controls_color jsColor" style="background-color: orange;">땅</div>
+              <div class="controls_color jsColor" style="background-color: lightslategray;">바위</div>
+              <div class="controls_color jsColor" style="background-color: lightcoral;">풀</div>
+              <div class="controls_color jsColor" style="background-color: royalblue;">물</div>
+              <div class="controls_color jsColor" style="background-color: saddlebrown;">가까운 나무</div>
+              <div class="controls_color jsColor" style="background-color: rosybrown;">먼 나무</div>
+            </div>
+            <div class="controls_range">
+                <div class="current" id="current_color" style="background-color: orange;">curr</div>
+                <input class="current" type="range" id="jsRange"
+                        min="0.1" max="50" value="10" step="0.1"/>
+            </div>
+            <div class="controls_btns">
+              <button id="jsReset">다시 그리기</button>
+              <button id="jsChange">바꾸기</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="result" class="result">
+          <canvas id="result-img" class="result_img" width="512" height="512"></canvas>
+          <script>
+            var res_canvas = document.getElementById("result-img");
+            var res_ctx = res_canvas.getContext("2d");
+            res_ctx.background = "white";
+            var img = new Image();
+            img.src = "{% static 'playground/intro.png' %}"
+            img.onload = function ()
+            {
+              res_ctx.drawImage(img, 0, 0, 512, 512)
+            }
+          </script>
+        </div>
+      </body>
+      <script src="{% static 'playground/js/canvas.js' %}"></script>
+    </html>
+  </div>
+
+{% include 'playground/footer.html' %}
+</div>

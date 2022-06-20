@@ -1,0 +1,21 @@
+{% extends 'toons/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}<title>Create toon</title>{% endblock %}
+{% block main_area %}
+<h1>Create New Episode of {{ work.title }}</h1>
+<hr/>
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table>
+        {{ form | crispy }}
+        {% if files %}
+            <p><strong>current:</strong></p>
+            {% for file in files %}
+                <p><a href="{{ file.images.url }}">{{ file.images.url }}</a></p>
+            {% endfor %}
+        {% endif %}
+    </table>
+    <button type="submit" class="but but-primary float-right">Submit</button>
+</form>
+    {{ form.media }}
+{% endblock %}

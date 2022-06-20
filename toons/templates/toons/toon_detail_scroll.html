@@ -1,0 +1,93 @@
+{% extends 'toons/base.html' %}
+{% block title %}
+    <title>{{ work.title }}-{{ toon.episode }}</title>
+{% endblock %}
+{% block main_area %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn_info btn-sm float-right" href="update_toon/"
+               role="button">edit<i class="fas fa-pen"></i></a>
+        {% endif %}
+    {% endif %}
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading"><a href="{{ work.get_absolute_url }}"><strong>{{ work.title }}</strong></a> <span class="text-muted">{{ work.author }}</span></h2>
+        <p class="lead">{{ work.description }}</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="{{ work.rep_thumbnail.url }}" />
+
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width=535px height=535px xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="black"></rect></svg>
+        <div class="text-light text-end">
+            <h1>{{ toon.episode }}화</h1>
+            <p>{{ toon.hook }}</p>
+        </div>
+
+        {% for toon_image in toon_images %}
+        <img class="bd-placeholder-img" width=535px src="{{ toon_image }}"/>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        {% if toon.episode == first %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">첫 화</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{{ toon.get_previous_url }}">&larr; {{ toon.get_previous_episode }} 화</a>
+        </li>
+        {% endif %}
+
+
+        {% if toon.episode == last %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">마지막 화</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{{ toon.get_next_url }}">{{ toon.get_next_episode }} 화 &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
+{% load crispy_forms_tags %}
+<!-- Comments Form -->
+    <div class="card my-4">
+    {%if user.is_authenticated %}
+      <h5 class="card-header">Leave a Comment:</h5>
+      <div class="card-body">
+          <form classy="comment-form" id="comment-form" method="post" action = "{{ toon.get_absolute_url }}/add_comment/">{% csrf_token %}
+              <div class="form-group">
+                  {{ comment_form | crispy }}
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+      {% endif %}
+    </div>
+    {% if toon.comment_set.exists %}
+    {% for comment in toon.comment_set.iterator %}
+    <!-- Single Comment -->
+    <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body" id="comment-{{ comment.pk }}">
+            <h5 class="mt-0">{{ comment.author.username }} :: <small class="text-muted">{{ comment.created_at }}</small> </h5>
+            <p>{{ comment.content | linebreaks }}</p>
+            <hr class="featurette-divider">
+          </div>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

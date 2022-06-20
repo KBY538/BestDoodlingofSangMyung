@@ -136,3 +136,10 @@ migrations/
 
 # Secret key
 secrets.json
+
+_media
+
+
+# model
+*.pth
+*.pb

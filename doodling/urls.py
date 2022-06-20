@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from doodling import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('playground/', include('playground.urls')),
+    path('toon/', include('toons.urls')),
+    path('wiki/', include('wiki.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('markdownx/', include('markdownx.urls')),
+    path('', include('single_pages.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # doucument_root이라는 property와 settings 안의 media url을 연결

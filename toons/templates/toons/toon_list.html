@@ -1,0 +1,39 @@
+{% extends 'toons/base.html' %}
+{% block title %}
+    <title>Toons</title>
+{% endblock %}
+{% block main_area %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn_info btn-sm float-right" href="upload_toon/"
+               role="button">new episode<i class="fas fa-pen"></i></a>
+        {% endif %}
+    {% endif %}
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading"><a href="{{ work.get_absolute_url }}"><strong>{{ work.title }}</strong></a> <span class="text-muted">{{ work.author }}</span></h2>
+        <p class="lead">{{ work.description }}</p>
+          {% if toonwiki_url %}
+        <p><a href="{{ toonwiki_url }}"><strong>위키 보러 가기</strong></a></p>
+          {% endif %}
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="{{ work.rep_thumbnail.url }}" />
+
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+<!-- Three columns of text below the carousel -->
+    <div class="row">
+        {% for toon in toons %}
+      <div class="col-lg-4">
+        <img class="bd-placeholder-img rounded-circle shadow-sm" width="140" height="140" src="{{ toon.thumbnail.url }}" />
+          <p>{{ toon.hook }}</p>
+        <p><a class="btn btn-secondary" href="{{ toon.get_absolute_url }}">{{ toon.episode }}화 &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+        {% endfor %}
+    </div><!-- /.row -->
+{% endblock %}
