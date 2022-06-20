@@ -4,7 +4,7 @@
 ## 프로젝트 최종 시연 영상
 
 영상 링크  
-[![SE_210426_프로젝트_중간발표_독강조](http://img.youtube.com/vi/pskd67eBe1Q/0.jpg)](https://www.youtube.com/watch?v=pskd67eBe1Q?t=0s)
+[![클라우드_프로그래밍_기말_과제_시연](http://img.youtube.com/vi/bY6V7C1Da_0/0.jpg)](https://www.youtube.com/watch?v=bY6V7C1Da_0?t=0s)
 
 (<-클릭해주세요)  
 ## Flow diagram
